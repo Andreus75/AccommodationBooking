@@ -3,8 +3,8 @@ const userUtil = require('../util/user.util');
 
 const Action = require('../dataBase/Action');
 const { passwordService, jwtService, emailService } = require('../services');
-const { SuccessCreated } = require('../configs/error_enum');
-const { ACTION } = require('../configs/action_token_type_enam');
+const { SuccessCreated, SuccessNoContent } = require('../configs/error_enum');
+const { ACTION } = require('../configs/token_type_enum');
 const { WELCOME } = require('../configs/email_action_enum');
 
 
@@ -44,11 +44,23 @@ module.exports = {
 
             await Action.create({ token, type: ACTION, user_id: newUser._id });
 
-            await emailService.sendEmail(email, WELCOME, { userName: name, token });
+            await emailService.sendMail(email, WELCOME, { userName: name, token });
 
             const newUserNormalise = userUtil.userNormaliseToAuth(newUser);
 
             res.status(SuccessCreated).json(newUserNormalise);
+        } catch (e) {
+            next(e);
+        }
+    },
+
+    deleteUser: async (req, res, next) => {
+        try {
+            const user = req.user;
+
+            await User.deleteOne(user);
+
+            res.sendStatus(SuccessNoContent);
         } catch (e) {
             next(e);
         }

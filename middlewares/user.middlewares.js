@@ -48,6 +48,49 @@ module.exports = {
         }
     },
 
+    isEmailValid: (validator) => (req, res, next) => {
+        try {
+            const email = req.body;
+
+            const { error, value } = validator.validate(email);
+
+            req.body = value;
+
+            if (error) {
+                return next({
+                    message: new Error(error.details[0].message),
+                    status: ClientErrorBadRequest
+                });
+            }
+
+            next();
+        } catch (e) {
+            next(e);
+        }
+    },
+
+    isPasswordValid: (validator) => (req, res, next) => {
+        try {
+            const password = req.body;
+
+            const { error, value } = validator.validate(password);
+
+            req.body = value;
+
+            if (error) {
+                return next({
+                    message: new Error(error.details[0].message),
+                    status: ClientErrorBadRequest
+                });
+            }
+
+            next();
+        } catch (e) {
+            next(e);
+        }
+    },
+
+
     findUserById: async (req, res, next) => {
         try {
             const { user_id } = req.params;

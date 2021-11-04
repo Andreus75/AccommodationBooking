@@ -2,10 +2,10 @@ const EmailTemplates = require('email-templates');
 const nodemailer = require('nodemailer');
 const path = require('path');
 
+const { USER_EMAIL, USER_PASSWORD } = require('../configs/config');
 const allTemplate = require('../email-template');
 const ErrorHandler = require('../errors/ErrorHandler');
 const { WRONG_TEMPLATE_NAME, ClientErrorBadRequest } = require('../configs/error_enum');
-const { USER_EMAIL, USER_PASSWORD } = require('../configs/config');
 
 const templateParser = new EmailTemplates({
     views: {
@@ -21,7 +21,7 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-const sendEmail = async (userEmail, emailAction, context={}) => {
+const sendMail = async (userEmail, emailAction, context={}) => {
     const templateInfo = allTemplate[emailAction];
 
     if (!templateInfo) {
@@ -42,5 +42,5 @@ const sendEmail = async (userEmail, emailAction, context={}) => {
 };
 
 module.exports = {
-    sendEmail
+    sendMail
 };
