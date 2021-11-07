@@ -40,7 +40,7 @@ module.exports = {
 
             if (!token) {
                 return next({
-                    message: INVALID_TOKEN+ 'token',
+                    message: INVALID_TOKEN,
                     status: ClientErrorUnauthorized
                 });
             }
@@ -51,7 +51,7 @@ module.exports = {
 
             if (!tokenResponse) {
                 return next({
-                    message: INVALID_TOKEN+ 'tokenResponse',
+                    message: INVALID_TOKEN,
                     status: ClientErrorUnauthorized
                 });
             }

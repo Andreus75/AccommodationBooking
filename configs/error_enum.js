@@ -10,6 +10,8 @@ module.exports = {
     USER_IS_NOT_ACTIVE: 'User is not active',
     USER_NOT_FOUND: 'User not found',
     NOT_SUPPORTED_FORMAT: 'Not supported format',
+    NOT_PERMISSION: 'Not permission, only role: user',
+    APARTMENT_WITH_THIS_ID_IS_MISSING: 'Apartment with this id is missing!!!',
 
 
     SuccessOK: 200,

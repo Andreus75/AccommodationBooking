@@ -20,7 +20,12 @@ const apartmentSchema = new Schema({
         required: true,
         trim: true
     },
-    number_of_people: {
+    number_of_person: {
+        type: Number,
+        required: true,
+        trim: true
+    },
+    price: {
         type: Number,
         required: true,
         trim: true
@@ -41,10 +46,18 @@ const apartmentSchema = new Schema({
         type: Boolean,
         trim: true
     },
+    available: {
+        type: Boolean,
+        default: true,
+        trim:true
+    },
     user_id: {
         type: Schema.Types.ObjectId,
         required: true,
         ref: 'user'
+    },
+    photo: {
+        type: String
     }
 }, { timestamps: true, toObject: { virtuals: true }, toJSON: { virtuals: true } });
 

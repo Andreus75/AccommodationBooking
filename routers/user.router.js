@@ -6,9 +6,12 @@ const userValidator = require('../validators/user.validator');
 
 router.post(
     '/',
+    userMiddleware.checkRole,
     userMiddleware.isUserBodyValid(userValidator.createUserValidator),
     userMiddleware.checkEmail,
     userController.createUser);
+
+router.use(authMiddleware.checkAccessToken, userMiddleware.isUserActive);
 
 router.get('/', userController.getUsers);
 

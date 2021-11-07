@@ -5,7 +5,10 @@ const {
     EMAIL_ALREADY_EXIST,
     ClientErrorNotFound,
     ClientErrorBadRequest,
-    USER_WITH_THIS_ID_IS_MISSING
+    USER_WITH_THIS_ID_IS_MISSING,
+    USER_IS_NOT_ACTIVE,
+    ClientErrorForbidden,
+    NOT_PERMISSION
 } = require('../configs/error_enum');
 
 
@@ -29,8 +32,24 @@ module.exports = {
         }
     },
 
+    checkRole: (req, res, next) => {
+        try {
+            const { role } = req.body;
+
+            if (role !== 'user') {
+                return next({
+                    message: NOT_PERMISSION,
+                    status: ClientErrorBadRequest
+                });
+            }
+        } catch (e) {
+            next(e);
+        }
+    },
+
     isUserBodyValid: (validator) => (req, res, next) => {
         try {
+
             const { error, value } = validator.validate(req.body);
 
             req.body = value;
@@ -90,6 +109,21 @@ module.exports = {
         }
     },
 
+    isUserActive: (request, response, next) => {
+        try {
+            const {user} = request;
+
+            if (!user.is_active) {
+                return next({
+                    message: USER_IS_NOT_ACTIVE,
+                    status: ClientErrorForbidden
+                });
+            }
+            next();
+        } catch (e) {
+            next(e);
+        }
+    },
 
     findUserById: async (req, res, next) => {
         try {
