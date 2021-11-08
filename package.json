@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "scripts": {
+    "start": "pm2 kill && pm2 start app.js"
+  },
   "dependencies": {
     "aws-sdk": "^2.1017.0",
     "bcrypt": "^5.0.1",
@@ -50,9 +53,6 @@
       "eslint",
       "git add"
     ]
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
