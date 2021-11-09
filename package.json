@@ -6,6 +6,9 @@
   "scripts": {
     "start": "pm2 kill && pm2 start app.js"
   },
+  "engines": {
+    "node": "14.18.1"
+  },
   "dependencies": {
     "aws-sdk": "^2.1017.0",
     "bcrypt": "^5.0.1",

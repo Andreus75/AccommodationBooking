@@ -12,18 +12,18 @@ module.exports = {
 
             const apartment = req.body;
 
-            const newApartment = await Apartment.create({...apartment, user_id: o_Auth.user_id});
+            let newApartment = await Apartment.create({...apartment, user_id: o_Auth.user_id});
             const { photo } = req.files || {};
 
             if (photo) {
                 const uploadInfo = await fileService.uploadImage(photo, 'apartment', newApartment._id.toString());
-                await Apartment.findOneAndUpdate(
+                newApartment = await Apartment.findByIdAndUpdate(
                     newApartment._id,
-                    { photo: uploadInfo },
+                    { photo: uploadInfo.Location },
                     {new: true});
             }
 
-            res.json(apartment);
+            res.json(newApartment);
         } catch (e) {
             next(e);
         }

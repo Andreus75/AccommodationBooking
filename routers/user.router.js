@@ -17,6 +17,11 @@ router.get('/', userController.getUsers);
 
 router.get('/:user_id', userMiddleware.findUserById, userController.getUserById);
 
+router.put(
+    '/manager_create/:user_id',
+    userMiddleware.findUserById,
+    userController.updateUserRole);
+
 router.delete('/', authMiddleware.checkAccessToken, userController.deleteUser);
 
 module.exports = router;

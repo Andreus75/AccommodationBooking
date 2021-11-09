@@ -11,7 +11,6 @@ const {
     NOT_PERMISSION
 } = require('../configs/error_enum');
 
-
 module.exports = {
     checkEmail: async (req, res, next) => {
         try {
@@ -42,6 +41,7 @@ module.exports = {
                     status: ClientErrorBadRequest
                 });
             }
+            next();
         } catch (e) {
             next(e);
         }
@@ -49,7 +49,6 @@ module.exports = {
 
     isUserBodyValid: (validator) => (req, res, next) => {
         try {
-
             const { error, value } = validator.validate(req.body);
 
             req.body = value;
@@ -138,11 +137,11 @@ module.exports = {
                 });
             }
 
-            req.user = user;
+            req.userUpdate = user;
 
             next();
         } catch (e) {
             next(e);
         }
-    }
+    },
 };

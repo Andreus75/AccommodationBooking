@@ -12,5 +12,10 @@ module.exports = {
     USER_EMAIL: process.env.USER_EMAIL,
     USER_PASSWORD: process.env.USER_PASSWORD,
 
-    SENTRY_DSN: process.env.SENTRY_DSN || 'https://856f8b4c69f54f9881709201ea973bbd@o1062748.ingest.sentry.io/6053208'
+    SENTRY_DSN: process.env.SENTRY_DSN || 'https://856f8b4c69f54f9881709201ea973bbd@o1062748.ingest.sentry.io/6053208',
+
+    AWS_SE_REGION: process.env.AWS_SE_REGION,
+    AWS_S3_NAME: process.env.AWS_S3_NAME,
+    AWS_S3_ACCESS_KEY: process.env.AWS_S3_ACCESS_KEY,
+    AWS_S3_SECRET_KEY: process.env.AWS_S3_SECRET_KEY
 };

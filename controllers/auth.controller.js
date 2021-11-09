@@ -37,13 +37,11 @@ module.exports = {
 
             const tokenPair = jwtService.generateTokenPair();
 
-            user.is_login = true;
-
-            await User.updateOne(user, {is_login: true});
+            await User.updateOne(user, {is_login: true}, {new: true});
 
             const logCount = await O_Auth.count({ user_id: user._id});
 
-            if (logCount > 10) {
+            if (logCount > 100) {
                 return next({
                     message: TO_MACH_LOGINS,
                     status: ClientErrorConflict

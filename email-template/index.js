@@ -16,5 +16,9 @@ module.exports = {
     [emailActionEnum.CHANGE_FORGOT_PASSWORD]: {
         templateName: 'change-forgot-password',
         subject: 'Your password was change :)'
+    },
+    [emailActionEnum.CREATE_MANAGER]: {
+        templateName: 'create-manager',
+        subject: 'You become a manager'
     }
 };
