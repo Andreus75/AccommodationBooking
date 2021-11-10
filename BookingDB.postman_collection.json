@@ -1,0 +1,542 @@
+//https://go.postman.co/workspace/My-Workspace~5b14af42-186f-4c20-850e-c7bfa0809222/collection/14018573-a87fbf38-fc03-44a6-b7a4-78163e2fd806
+
+//https://www.getpostman.com/collections/4325a6c9b9d2f1b8dcc0
+
+{
+	"info": {
+		"_postman_id": "a87fbf38-fc03-44a6-b7a4-78163e2fd806",
+		"name": "BookingDB",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "createUser",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Andriy\",\r\n    \"surname\": \"Tryndey\",\r\n    \"age\": 45,\r\n    \"role\": \"admin\",\r\n    \"email\": \"tryndeyandriy@gmail.com\",\r\n    \"password\": \"Hello_World1!\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getUsers",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Andriy\",\r\n    \"surname\": \"Tryndey\",\r\n    \"age\": 45,\r\n    \"role\": \"admin\",\r\n    \"email\": \"tryndeyandriy@gmail.com\",\r\n    \"password\": \"Hello_World1!\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "authorisationUser",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzYwMzY0NzcsImV4cCI6MTYzNjAzNzM3N30.Xh0XWL1G3JqQsBq2nU7rGLwE8XiM5tq-Ew9x9wfEnk0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"tryndeyandriy@gmail.com\",\r\n    \"password\": \"Hello_World1!\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/auth",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "filterApartmetns",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"country\": \"Ukraine\",\r\n    \"city\": \"Lviv\",\r\n    \"district\": \"Suhiv\",\r\n    \"area\": 40,\r\n    \"number_of_person\": 3,\r\n    \"price_start\": 120,\r\n    \"price_end\": 150\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/apartment/filters",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"apartment",
+						"filters"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createApartment",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzYyMjM1NTQsImV4cCI6MTYzNjIyNDQ1NH0.X3ZC6Dw9uV97fhVAWypMn6f12VpZyN_UrOyuuJhkphc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"country\": \"Ukraine\",\r\n    \"city\": \"Lviv\",\r\n    \"district\": \"Suhiv\",\r\n    \"area\": 40,\r\n    \"price\": 300,\r\n    \"number_of_person\": 3,\r\n    \"rooms\": 2,\r\n    \"kitchen\": true,\r\n    \"bathroom\": true,\r\n    \"parking\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/apartment",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"apartment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createManagerRole",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzY0NTUxNTEsImV4cCI6MTYzNjQ1NjA1MX0.5m4rSKTo1WFU_4qR2RaS_FYfKhU8R5R2TeQMdsCwexo",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/users/manager_create/61850c430fae8a7f0e960d5e",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"users",
+						"manager_create",
+						"61850c430fae8a7f0e960d5e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteUser",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzYwNDU0NDYsImV4cCI6MTYzNjA0NjM0Nn0._IQDAfhHeXw8Suw0epsjfEMjPYBcdRwUbr_FWDOGxvM",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5000/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "put/password/forgot",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzYwNjIwODEsImV4cCI6MTYzNjE0ODQ4MX0.WjVj3Zw8Lw5sJQSAQztdrIFTeu3jqPc_GLx3WLqqja8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"password\": \"Hello8_World1!\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/auth/password/forgot",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"auth",
+						"password",
+						"forgot"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createApartment",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzY1NTI3NzMsImV4cCI6MTYzNjU1MzY3M30.FG6nbaxjJw_5YPub3e25Gh9SN9HIhC7utHS8uLv7ddk",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "country",
+							"value": "Ukraine",
+							"type": "text"
+						},
+						{
+							"key": "city",
+							"value": "Rivne",
+							"type": "text"
+						},
+						{
+							"key": "street",
+							"value": "Lvivska",
+							"type": "text"
+						},
+						{
+							"key": "area",
+							"value": "30",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "100",
+							"type": "text"
+						},
+						{
+							"key": "number_of_person",
+							"value": "3",
+							"type": "text"
+						},
+						{
+							"key": "rooms",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "kitchen",
+							"value": "true",
+							"type": "text"
+						},
+						{
+							"key": "bathroom",
+							"value": "true",
+							"type": "text"
+						},
+						{
+							"key": "parking",
+							"value": "true",
+							"type": "text"
+						},
+						{
+							"key": "photo",
+							"type": "file",
+							"src": "/C:/Users/t_and/WebstormProjects/accommodationbooking/photo/apartment_photo2.jpg"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/apartment",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"apartment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createBooking",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzY1NTI3NzMsImV4cCI6MTYzNjU1MzY3M30.FG6nbaxjJw_5YPub3e25Gh9SN9HIhC7utHS8uLv7ddk",
+						"type": "text"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"start_day\": \"2021-11-11\",\r\n    \"end_day\": \"2021-11-14\",\r\n    \"count_person\": 3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/booking/6187f9588afdbb09d008f93b",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"booking",
+						"6187f9588afdbb09d008f93b"
+					],
+					"query": [
+						{
+							"key": "start_day",
+							"value": "2021-11-11",
+							"disabled": true
+						},
+						{
+							"key": "end_day",
+							"value": "2021-11-14",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getApartments",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/apartment",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"apartment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getApartment",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/apartment/:apartment_id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"apartment",
+						":apartment_id"
+					],
+					"variable": [
+						{
+							"key": "apartment_id",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "filterApartments",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/apartment/filters",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"apartment",
+						"filters"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "logautUser",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/auth/logout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"auth",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "activateUser",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/auth/activate/:token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"auth",
+						"activate",
+						":token"
+					],
+					"variable": [
+						{
+							"key": "token",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "passwordForgot",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/auth/password/forgot",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"auth",
+						"password",
+						"forgot"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
