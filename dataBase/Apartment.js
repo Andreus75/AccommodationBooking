@@ -11,7 +11,7 @@ const apartmentSchema = new Schema({
         required: true,
         trim: true
     },
-    district: {
+    street: {
         type: String,
         trim: true
     },

@@ -19,10 +19,11 @@ app.use(fileUpload({}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const { apartmentRouter, authRouter, userRouter } = require('./routers');
+const { apartmentRouter, authRouter, userRouter, bookingRouter } = require('./routers');
 
 app.use('/apartment', apartmentRouter);
 app.use('/auth', authRouter);
+app.use('/booking', bookingRouter);
 app.use('/users', userRouter);
 
 app.use(Sentry.Handlers.errorHandler());

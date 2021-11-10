@@ -20,5 +20,13 @@ module.exports = {
     [emailActionEnum.CREATE_MANAGER]: {
         templateName: 'create-manager',
         subject: 'You become a manager'
+    },
+    [emailActionEnum.SUCCESSFUL_BOOKING]: {
+        templateName: 'successful-booking',
+        subject: 'You successful booking apartment'
+    },
+    [emailActionEnum.APARTMENT_WAS_BOOKING]: {
+        templateName: 'apartment-was-booking',
+        subject: 'Your apartment was booking'
     }
 };

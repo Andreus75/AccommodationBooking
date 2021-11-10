@@ -13,7 +13,7 @@ const createApartmentValidator = Joi.object({
         .max(40)
         .trim()
         .required(),
-    district: Joi.string()
+    street: Joi.string()
         .alphanum()
         .min(2)
         .max(40)

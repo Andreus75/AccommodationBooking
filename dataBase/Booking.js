@@ -6,7 +6,7 @@ const bookingApartment = new Schema({
         required: true,
         trim: true,
     },
-    and_day: {
+    end_day: {
         type: Date,
         required: true,
         trim: true
@@ -15,6 +15,11 @@ const bookingApartment = new Schema({
         type: Schema.Types.ObjectId,
         required: true,
         ref: 'apartment'
+    },
+    count_person: {
+        type: Number,
+        required: true,
+        trim:true
     },
     price: {
         type: Number,
