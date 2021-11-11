@@ -1,12 +1,14 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const fileUpload = require('express-fileupload');
+const swaggerUi = require('swagger-ui-express');
 
 require('dotenv').config();
 
 const { PORT, MONGO_CONNECT_URL } = require('./configs/config');
 const Sentry = require('./logger/sentry');
 const createDefaultData = require('./util/default-data.utils');
+const swaggerJson = require('./docs/swagger.json');
 
 const app = express();
 
@@ -22,6 +24,7 @@ app.use(express.urlencoded({ extended: true }));
 
 const { apartmentRouter, authRouter, userRouter, bookingRouter } = require('./routers');
 
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerJson));
 app.use('/apartment', apartmentRouter);
 app.use('/auth', authRouter);
 app.use('/booking', bookingRouter);

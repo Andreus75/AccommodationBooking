@@ -7,18 +7,22 @@ const Action = require('../dataBase/Action');
 const { ACTION } = require('../configs/token_type_enum');
 
 module.exports = async () => {
-    const hashedPassword = await passwordService.hash(DEFAULT_PASSWORD);
+    const user = await User.findOne({ role: ADMIN });
 
-    const newAdmin = await User.create({
-        name: 'Anna',
-        surname: 'Koolya',
-        age: 25,
-        role: ADMIN,
-        email: 'Anna.admin@gmail.com',
-        password: hashedPassword,
-    });
-    const token = jwtService.createActivateToken();
+    if (!user) {
+        const hashedPassword = await passwordService.hash(DEFAULT_PASSWORD);
 
-    await Action.create({ token, type: ACTION, user_id: newAdmin._id });
-    await emailService.sendMail(newAdmin.email, WELCOME, { userName: name, token });
+        const newAdmin = await User.create({
+            name: 'Anna',
+            surname: 'Koolya',
+            age: 25,
+            role: ADMIN,
+            email: 'Anna.admin@gmail.com',
+            password: hashedPassword,
+        });
+        const token = jwtService.createActivateToken();
+
+        await Action.create({ token, type: ACTION, user_id: newAdmin._id });
+        await emailService.sendMail(newAdmin.email, WELCOME, { userName: name, token });
+    }
 };
