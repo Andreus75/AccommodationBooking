@@ -13,6 +13,18 @@
     {
       "name": "users",
       "description": "Everything about users"
+    },
+    {
+      "name": "auth",
+      "description": "Everything about authentication"
+    },
+    {
+      "name": "apartment",
+      "description": "Everything about apartments"
+    },
+    {
+      "name": "booking",
+      "description": "Everything about booking apartments"
     }
   ],
   "paths": {
@@ -118,6 +130,579 @@
             }
           }
         }
+      },
+      "delete": {
+        "tags": ["users"],
+        "summary": "Delete user from the store",
+        "operationId": "deleteUser",
+        "description": "User object that you delete from store",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "default": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "user was deleted"
+          },
+          "400": {
+            "description": "Just an error",
+            "schema": {
+              "$ref": "#/definitions/commonError"
+            }
+          }
+        }
+      }
+    },
+    "/users/{user_id}": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get a user from the store",
+        "operationId": "getUserById",
+        "description": "User object that you get from store",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "default": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "user was found",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/singleUser"
+              }
+            }
+          },
+          "400": {
+            "description": "Just an error",
+            "schema": {
+              "$ref": "#/definitions/commonError"
+            }
+          }
+        }
+      }
+    },
+    "/users/manager_create/{user_id}": {
+      "put": {
+        "tags": ["users"],
+        "summary": "Create manager user",
+        "operationId": "createManager",
+        "description": "",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "default": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Manager was created",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/singleUser"
+              }
+            }
+          },
+          "400": {
+            "description": "Just an error",
+            "schema": {
+              "$ref": "#/definitions/commonError"
+            }
+          }
+        }
+      }
+    },
+    "/auth": {
+      "post": {
+        "tags": ["auth"],
+        "summary": "Registration a new user",
+        "operationId": "authUser",
+        "description": "User object that needs registrations",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "formData",
+            "default": "Example@gmail.com",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "in": "formData",
+            "default": "Hello_Wold1!",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User was registered"
+          },
+          "400": {
+            "description": "Just an error",
+            "schema": {
+              "$ref": "#/definitions/commonError"
+            }
+          }
+        }
+      }
+    },
+    "/auth/logout": {
+      "post": {
+        "tags": ["auth"],
+        "summary": "Logout user",
+        "operationId": "logoutUser",
+        "description": "User object that needs logout",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "default": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User was logout"
+          },
+          "400": {
+            "description": "Just an error",
+            "schema": {
+              "$ref": "#/definitions/commonError"
+            }
+          }
+        }
+      }
+    },
+    "/auth/refresh": {
+      "post": {
+        "tags": ["auth"],
+        "summary": "Refresh user token",
+        "operationId": "refreshUser",
+        "description": "User object that needs refresh token",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "default": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User token was refresh"
+          },
+          "400": {
+            "description": "Just an error",
+            "schema": {
+              "$ref": "#/definitions/commonError"
+            }
+          }
+        }
+      }
+    },
+    "/auth/activate/{token}": {
+      "get": {
+        "tags": ["auth"],
+        "summary": "Activate user token",
+        "operationId": "activateUserToken",
+        "description": "User object that needs activate token",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "default": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User token was activated"
+          },
+          "400": {
+            "description": "Just an error",
+            "schema": {
+              "$ref": "#/definitions/commonError"
+            }
+          }
+        }
+      }
+    },
+    "/auth/forgot": {
+      "post": {
+        "tags": ["auth"],
+        "summary": "Forgot password",
+        "operationId": "forgotPassword",
+        "description": "User forgot password",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "formData",
+            "default": "Example@gmail.com",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "check mail"
+          },
+          "400": {
+            "description": "Just an error",
+            "schema": {
+              "$ref": "#/definitions/commonError"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["auth"],
+        "summary": "Forgot and change password",
+        "operationId": "changePassword",
+        "description": "Change password",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "default": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "in": "formData",
+            "default": "Hello_Wold1!",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Password was changed"
+          },
+          "400": {
+            "description": "Just an error",
+            "schema": {
+              "$ref": "#/definitions/commonError"
+            }
+          }
+        }
+      }
+    },
+    "/apartment": {
+      "post": {
+        "tags": ["apartment"],
+        "summary": "Add a new apartment to the store",
+        "operationId": "createApartment",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "default": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "country",
+            "in": "formData",
+            "default": "Ukraine",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "city",
+            "in": "formData",
+            "default": "Lviv",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "street",
+            "in": "formData",
+            "default": "Shevchenka",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "area",
+            "in": "formData",
+            "default": 30,
+            "required": true,
+            "type": "number"
+          },
+          {
+            "name": "number_of_person",
+            "in": "formData",
+            "default": 2,
+            "required": true,
+            "type": "number"
+          },
+          {
+            "name": "price",
+            "in": "formData",
+            "default": 100,
+            "required": true,
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Apartment was created",
+            "schema": {
+              "$ref": "#/definitions/singleApartment"
+            }
+          },
+          "400": {
+            "description": "Just an error",
+            "schema": {
+              "$ref": "#/definitions/commonError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["apartment"],
+        "summary": "Pull out all apartments from the store",
+        "operationId": "getAllApartments",
+        "description": "",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "default": 1,
+            "required": false,
+            "type": "number"
+          },
+          {
+            "name": "perPage",
+            "in": "query",
+            "default": 20,
+            "required": false,
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "apartments have been found",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/singleApartment"
+              }
+            }
+          },
+          "400": {
+            "description": "Just an error",
+            "schema": {
+              "$ref": "#/definitions/commonError"
+            }
+          }
+        }
+      }
+    },
+    "/apartment/{apartment_id}": {
+      "get": {
+        "tags": ["apartment"],
+        "summary": "Get a apartment from the store",
+        "operationId": "getApartmentById",
+        "description": "Apartment object that you get from store",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "apartment was found",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/singleApartment"
+              }
+            }
+          },
+          "400": {
+            "description": "Just an error",
+            "schema": {
+              "$ref": "#/definitions/commonError"
+            }
+          }
+        }
+      }
+    },
+    "/apartment/filters": {
+      "post": {
+        "tags": ["apartment"],
+        "summary": "Pull out filtered apartments from the store",
+        "operationId": "getAllFilteredApartments",
+        "description": "",
+        "parameters": [
+          {
+            "name": "country",
+            "in": "formData",
+            "default": "Ukraine",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "city",
+            "in": "formData",
+            "default": "Lviv",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "street",
+            "in": "formData",
+            "default": "Shevchenka",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "area",
+            "in": "formData",
+            "default": 30,
+            "required": true,
+            "type": "number"
+          },
+          {
+            "name": "number_of_person",
+            "in": "formData",
+            "default": 2,
+            "required": true,
+            "type": "number"
+          },
+          {
+            "name": "price_start",
+            "in": "formData",
+            "default": 100,
+            "required": true,
+            "type": "number"
+          },
+          {
+            "name": "price_end",
+            "in": "formData",
+            "default": 300,
+            "required": true,
+            "type": "number"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "default": 1,
+            "required": false,
+            "type": "number"
+          },
+          {
+            "name": "perPage",
+            "in": "query",
+            "default": 20,
+            "required": false,
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "apartments have been found",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/singleApartment"
+              }
+            }
+          },
+          "400": {
+            "description": "Just an error",
+            "schema": {
+              "$ref": "#/definitions/commonError"
+            }
+          }
+        }
+      }
+    },
+    "/booking/{apartment_id}": {
+      "post": {
+        "tags": ["booking"],
+        "summary": "Add a new booking to the store",
+        "operationId": "createBooking",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "default": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "start_day",
+            "in": "formData",
+            "default": "11-11-2021",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "end_day",
+            "in": "formData",
+            "default": "15-11-2021",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "count_person",
+            "in": "formData",
+            "default": 2,
+            "required": true,
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "BookingApartment was created",
+            "schema": {
+              "$ref": "#/definitions/singleBooking"
+            }
+          },
+          "400": {
+            "description": "Just an error",
+            "schema": {
+              "$ref": "#/definitions/commonError"
+            }
+          }
+        }
       }
     }
   },
@@ -145,6 +730,76 @@
         "email": {
           "type": "string",
           "example": "Example@gmail.com"
+        }
+      }
+    },
+    "singleApartment": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "12345@ee",
+          "description": "MongoDB ID"
+        },
+        "country": {
+          "type": "string",
+          "example": "Ukraine"
+        },
+        "city": {
+          "type": "string",
+          "example": "Lviv"
+        },
+        "street": {
+          "type": "string",
+          "example": "Shevchenka"
+        },
+        "area": {
+          "type": "number",
+          "example": 30
+        },
+        "number_of_person": {
+          "type": "number",
+          "example": 2
+        },
+        "price": {
+          "type": "number",
+          "example": 100
+        }
+      }
+    },
+    "singleBooking": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "12345@ee",
+          "description": "MongoDB ID"
+        },
+        "start_day": {
+          "type": "string",
+          "example": "11-11-2021"
+        },
+        "end_day": {
+          "type": "string",
+          "example": "15-11-2021"
+        },
+        "count_person": {
+          "type": "string",
+          "example": 2
+        },
+        "owner_id": {
+          "type": "string",
+          "example": "12345@aaa",
+          "description": "MongoDB ID"
+        },
+        "client_id": {
+          "type": "string",
+          "example": "12345@sss",
+          "description": "MongoDB ID"
+        },
+        "price": {
+          "type": "number",
+          "example": 300
         }
       }
     },
