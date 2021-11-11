@@ -7,6 +7,7 @@ require('dotenv').config();
 
 const { PORT, MONGO_CONNECT_URL } = require('./configs/config');
 const Sentry = require('./logger/sentry');
+const startCrone = require('./cron');
 const createDefaultData = require('./util/default-data.utils');
 const swaggerJson = require('./docs/swagger.json');
 
@@ -46,4 +47,5 @@ app.use('*', (err, request, response, next) => {
 app.listen(PORT, () => {
     console.log(`App listen ${PORT}`);
     createDefaultData();
+    startCrone();
 });
